@@ -63,7 +63,7 @@ class Client
      * @return self
      * Returns the object handle (so you can chain method calls, if you like)
      */
-    public function query($id, string $method, array $arguments = null): self
+    public function query($id, string $method, ?array $arguments = null): self
     {
         $request = self::getRequest($method, $arguments);
         $request['id'] = $id;
@@ -80,7 +80,7 @@ class Client
      * @return self
      * Returns the object handle (so you can chain method calls, if you like)
      */
-    public function notify($method, array $arguments = null): self
+    public function notify($method, ?array $arguments = null): self
     {
         $request = self::getRequest($method, $arguments);
 
@@ -209,7 +209,7 @@ class Client
         return $responses;
     }
 
-    private static function getRequest(string $method, array $arguments = null): array
+    private static function getRequest(string $method, ?array $arguments = null): array
     {
         $request = [
             'jsonrpc' => self::VERSION,
@@ -238,7 +238,7 @@ class Client
         return var_export($value, true);
     }
 
-    private function getResponses($input, array &$responses = null): bool
+    private function getResponses($input, ?array &$responses = null): bool
     {
         if ($this->getResponse($input, $response)) {
             $responses = [$response];
